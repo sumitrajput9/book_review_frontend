@@ -1,5 +1,3 @@
-import React from 'react';
-
 const BookCard = ({ title, author, image, genre }: any) => {
   return (
     <div className="shadow-md rounded-md p-4 w-full max-w-sm">

@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
 // MUI Icons
@@ -13,19 +11,12 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import HomeIcon from '@mui/icons-material/Home';
-import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import { useAuth } from '../context/AuthContext';
 
 const Navbar: React.FC = () => {
   // const [ setIsLoggedIn] = useState(false);
   const { isLoggedIn, logout } = useAuth(); // use context
   const navigate = useNavigate();
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    // setIsLoggedIn(!!token);
-  }, []);
-
-  
 
   const handleLogout = () => {
     localStorage.removeItem('token');
