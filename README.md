@@ -1,54 +1,79 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 📘 Book Review App – Frontend
 
-Currently, two official plugins are available:
+### 🌐 Live Preview
+- **Live URL:** [https://book-review-aamp.onrender.com](https://book-review-aamp.onrender.com)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 📁 GitHub Repository
+- **Frontend Repo:** [https://github.com/sumitrajput9/book_review_frontend](https://github.com/sumitrajput9/book_review_frontend)
 
-## Expanding the ESLint configuration
+### 🖥️ Tech Stack
+- React + Vite
+- TypeScript
+- MUI (Material UI)
+- Axios
+- React Router DOM
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 🚀 Features
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+#### 🔐 Authentication
+- Login with JWT
+- Protected routes using token check
+- Axios interceptor adds Authorization header
+
+#### 📚 Book Management
+- View all books in a responsive table
+- Search books by title/author
+- Add book via modal (title, author, genre, image)
+- `createdBy` extracted from token
+
+#### 🗣️ Reviews
+- View and add reviews for each book
+- If not logged in, redirects to login page
+
+### 🧩 Components Overview
+
+| Component        | Description                                |
+|------------------|--------------------------------------------|
+| `BookCard`       | Displays single book in card layout        |
+| `AllBooks.tsx`   | Table-based view of all books              |
+| `AddBookModal`   | Modal form to create a new book            |
+| `BookDetails.tsx`| Book details with reviews & add-review form|
+| `Login.tsx`      | User login page                            |
+| `Navbar.tsx`     | Navigation bar                             |
+
+### 🔄 API Integration
+
+All in `services/bookService.ts`:
+- `fetchBooks()`
+- `searchBooks(query)`
+- `createBook(formData)`
+- `getBookById(id)`
+- `postReview(id, data)`
+
+### ⚙️ Environment Variables
+
+Create a `.env` file:
+
+```
+VITE_API_BASE_URL=https://book-review-backend-2-l59z.onrender.com/api
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Used in `axios.ts`:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```ts
+const instance = axios.create({
+  baseURL: import.meta.env.VITE_API_BASE_URL,
+  withCredentials: true,
+});
+```
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+### 🧪 How to Run Locally
+
+```bash
+git clone https://github.com/sumitrajput9/book_review_frontend.git
+cd book_review_frontend
+npm install
+cp .env.example .env   # Or create manually and update API URL
+npm run dev
 ```
